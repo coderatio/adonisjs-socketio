@@ -1,0 +1,21 @@
+{{{
+  exports({ to: app.startPath('ws.ts') })
+}}}
+
+
+import app from '@adonisjs/core/services/app'
+import logger from '@adonisjs/core/services/logger'
+import { socket, ws } from 'adonisjs-socketio/services/main'
+
+app
+  .ready(() => {
+    logger.info('[Socket] - Websocket server started')
+
+    /**
+     * Register sockets
+     * You only need to call socket.register(TestSocket)
+     */
+
+    // Register your sockets here
+  })
+  .then(() => { })

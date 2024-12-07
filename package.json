@@ -1,0 +1,92 @@
+{
+  "name": "adonisjs-socketio",
+  "description": "A lite package for socket.io",
+  "version": "0.1.0",
+  "engines": {
+    "node": ">=20.6.0"
+  },
+  "type": "module",
+  "files": [
+    "build/src",
+    "build/providers",
+    "build/stubs",
+    "build/index.d.ts",
+    "build/index.js"
+  ],
+  "exports": {
+    ".": "./build/index.js",
+    "./types": "./build/src/types.js",
+    "./socket_manager": "./build/src/socket_manager.js",
+    "./services/main": "./build/services/main.js",
+    "./ws_provider": "./build/providers/ws_provider.js"
+  },
+  "paths": {
+    "@adonisjs-socketio/*": "./src/*.js"
+  },
+  "scripts": {
+    "clean": "del-cli build",
+    "copy:templates": "copyfiles \"stubs/**/*.stub\" build",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "quick:test": "node --import=./tsnode.esm.js --enable-source-maps bin/test.ts",
+    "pretest": "npm run lint",
+    "test": "c8 npm run quick:test",
+    "prebuild": "npm run lint && npm run clean",
+    "build": "tsc",
+    "postbuild": "npm run copy:templates",
+    "release": "np",
+    "version": "npm run build",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [],
+  "author": "Josiah Yahaya <josiahoyahaya@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "socket.io": "^4.8.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@adonisjs/assembler": "^7.8.2",
+    "@adonisjs/core": "^6.12.0",
+    "@adonisjs/eslint-config": "2.0.0-beta.7",
+    "@adonisjs/prettier-config": "^1.4.0",
+    "@adonisjs/tsconfig": "^1.3.0",
+    "@japa/assert": "^3.0.0",
+    "@japa/runner": "^3.1.4",
+    "@swc/core": "^1.6.3",
+    "@types/node": "^20.14.5",
+    "c8": "^10.1.2",
+    "copyfiles": "^2.4.1",
+    "del-cli": "^5.1.0",
+    "eslint": "^9.15.0",
+    "np": "^10.0.6",
+    "prettier": "^3.3.2",
+    "ts-node-maintained": "^10.9.4",
+    "typescript": "^5.4.5"
+  },
+  "peerDependencies": {
+    "@adonisjs/core": "^6.2.0",
+    "reflect-metadata": "^0.2.2"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "np": {
+    "message": "chore(release): %s",
+    "tag": "latest",
+    "branch": "main",
+    "anyBranch": false
+  },
+  "c8": {
+    "reporter": [
+      "text",
+      "html"
+    ],
+    "exclude": [
+      "tests/**"
+    ]
+  },
+  "prettier": "@adonisjs/prettier-config"
+}
